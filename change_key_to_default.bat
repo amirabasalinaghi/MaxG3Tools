@@ -7,6 +7,6 @@ IF NOT EXIST MEMORY_ZT3Pro_modded.bin (
 	)
 )
 IF EXIST MEMORY_ZT3Pro_modded.bin (
-	zt3tool.exe MEMORY_ZT3Pro_modded.bin us
+	zt3tool.exe MEMORY_ZT3Pro_modded.bin key
 )
 pause

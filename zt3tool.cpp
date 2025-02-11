@@ -18,12 +18,15 @@ vector<size_t> findPattern(string& content, string pattern, size_t offset = 0) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        cerr << "Usage: " << argv[0] << " <dump_name>" << endl;
+    cout << "ZT3Tools | MIT License Copyright (c) 2025 ScooterTeam" << endl;
+    if (argc != 3) {
+        cerr << "Usage: " << argv[0] << " <dump_name> <option>" << endl;
+        cerr << "Options: " << endl << "us - change SN to US" << endl << "key - change encrypting key" << endl;
         return 1;
     }
 
     string filename = argv[1];
+    string user_option = argv[2];
     
     ifstream file(filename, ios::binary);
     if (!file) {
@@ -36,27 +39,32 @@ int main(int argc, char* argv[]) {
     
     string fileContent(buffer.begin(), buffer.end());
     vector<size_t> locations;
-    
-    // change encrypting key to default one
-    locations = findPattern(fileContent, "SCOOTER_VCU_xxU2");
-    if (!locations.empty()) {
-        for (size_t location : locations) {
-            fileContent.replace(location+0x20, DEFAULT_KEY.size(), DEFAULT_KEY);
-        }
-        cout << "The scooter key has been changed." << endl;
-    } else {
-        cerr << "ERROR: The scooter key could not be changed." << endl;
-    }
 
-    // change SN region to US
-    locations = findPattern(fileContent, "1K1", 0x1F000);
-    if (!locations.empty()) {
-        for (size_t location : locations) {
-            fileContent[location + 3] = 'U';
+    if (user_option == "us") {
+        // change SN region to US
+        locations = findPattern(fileContent, "1K1", 0x1F000);
+        if (!locations.empty()) {
+            for (size_t location : locations) {
+                fileContent[location + 3] = 'U';
+            }
+            cout << "The region of the scooter has been changed to the US." << endl;
+        } else {
+            cerr << "ERROR: Serial number not found in file!" << endl;
         }
-        cout << "The region of the scooter has been changed to the US." << endl;
+    } else if (user_option == "key") {
+        // change encrypting key to default one
+        locations = findPattern(fileContent, "SCOOTER_VCU_xxU2");
+        if (!locations.empty()) {
+            for (size_t location : locations) {
+                fileContent.replace(location+0x20, DEFAULT_KEY.size(), DEFAULT_KEY);
+            }
+            cout << "The scooter key has been changed." << endl;
+        } else {
+            cerr << "ERROR: The scooter key could not be changed." << endl;
+        }
     } else {
-        cerr << "ERROR: Serial number not found in file!" << endl;
+        cerr << "Wrong option! " << user_option << endl;
+        return 1;
     }
 
     ofstream outFile(filename, ios::binary);
