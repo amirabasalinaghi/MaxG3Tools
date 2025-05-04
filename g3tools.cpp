@@ -81,7 +81,7 @@ string extractOldKey(string oldDump) {
 }
 
 int main(int argc, char* argv[]) {
-    cout << "ZT3Tools V3 | MIT License Copyright (c) 2025 ScooterTeam" << endl;
+    cout << "G3 Tools V3 | MIT License Copyright (c) 2025 ScooterTeam" << endl;
     if (argc != 3 && argc != 4) {
         cerr << "Usage: " << argv[0] << " <dump_filename> <option> [optional]" << endl;
         cerr << "Options: " << endl 
