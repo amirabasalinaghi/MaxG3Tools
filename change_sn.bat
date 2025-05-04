@@ -9,11 +9,8 @@ IF NOT EXIST MEMORY_ZT3Pro_modded.bin (
 	)
 )
 IF EXIST MEMORY_ZT3Pro_modded.bin (
-	echo E - Europe
-	echo Z - China
-	echo U - USA
-	echo D - Germany
-	echo A - Asia
+	echo C - USA
+	echo B - Germany
 	set /p userchoice="Choose a new region of the scooter: "
 	zt3tool.exe MEMORY_ZT3Pro_modded.bin changeregion !userchoice!
 )
