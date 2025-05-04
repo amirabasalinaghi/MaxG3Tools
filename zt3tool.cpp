@@ -34,12 +34,12 @@ void changeRegion(string& content, string region) {
         throw invalid_argument("You must specify the char of the SN region!");
     }
 
-    vector<string> regions = {"Z", "U", "E", "D", "A"};
+    vector<string> regions = {"C", "B"};
     if (find(regions.begin(), regions.end(), region) == regions.end()) {
         throw invalid_argument("Wrong SN region!");
     }
 
-    vector<size_t> locations = findPattern(content, "1K1", 0x1F000);
+    vector<size_t> locations = findPattern(content, "1CG", 0x1F000);
     if (!locations.empty()) {
         for (size_t location : locations) {
             content[location + 3] = region.at(0);
@@ -51,7 +51,7 @@ void changeRegion(string& content, string region) {
 }
 
 void replaceKey(string& content, string encKey = DEFAULT_KEY) {
-    vector<size_t> locations = findPattern(content, "SCOOTER_VCU_xxU2");
+    vector<size_t> locations = findPattern(content, "SCOOTER_VCU_xxG3");
     if (encKey.size() != 0x16) {
         throw runtime_error("The key is not 0x16 long!");
     }
@@ -66,7 +66,7 @@ void replaceKey(string& content, string encKey = DEFAULT_KEY) {
 }
 
 string extractOldKey(string oldDump) {
-    vector<size_t> locations = findPattern(oldDump, "SCOOTER_VCU_xxU2");
+    vector<size_t> locations = findPattern(oldDump, "SCOOTER_VCU_xxG3");
     if (locations.empty()) {
         throw runtime_error("Cannot find the location of the key in the original dump!");
     }
@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
             replaceKey(fileContent);
         } else if (user_option == "verify") {
             // verify if there are certain phrases in the memory dump file of the scooter
-            if (findPattern(fileContent, "SCOOTER_VCU_xxU2").size() != 2 || findPattern(fileContent, "1K1", 0x1F000).size() != 2) {
+            if (findPattern(fileContent, "SCOOTER_VCU_xxG3").size() != 2 || findPattern(fileContent, "1CG", 0x1F000).size() != 2) {
                 throw runtime_error("The dump memory is probably corrupted!");
             }
             cout << "Dump correct." << endl;
