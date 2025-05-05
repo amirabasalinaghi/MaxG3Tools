@@ -3,6 +3,7 @@ A set of scripts changing the SN and unlocking the Region of Ninebot MAX G3.
 
 
 🛠️ Ninebot Max G3 Unlock & Cruise Control Activation Guide
+
 ⚠️ Disclaimer: Modifying your scooter’s firmware may void your warranty and violate local laws. Proceed at your own risk. You are responsible for ensuring compliance with road and traffic regulations in your country.
 
 🔧 What You Need
