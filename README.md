@@ -55,6 +55,8 @@ ST-Link GND → VCU GND
 
 (required) ST-Link 3.3V → VCU 3.3V
 
+IMPORTANT : the C45 Cpacitor on the board needs to be shorted during the whole read and write process.
+
 4. Backup Original Firmware
 Connect the ST-Link to your PC.
 
