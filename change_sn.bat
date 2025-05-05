@@ -9,9 +9,12 @@ IF NOT EXIST MEMORY_G3_modded.bin (
 	)
 )
 IF EXIST MEMORY_G3_modded.bin (
-	echo C - USA
-	echo B - Germany
+	echo E - Europe
+	echo Z - China
+	echo U - USA
+	echo D - Germany
+	echo A - Asia
 	set /p userchoice="Choose a new region of the scooter: "
-	g3tool.exe MEMORY_G3_modded.bin changeregion !userchoice!
+	G3tool.exe MEMORY_G3_modded.bin changeregion !userchoice!
 )
 pause

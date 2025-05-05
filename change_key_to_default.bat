@@ -7,6 +7,6 @@ IF NOT EXIST MEMORY_G3_modded.bin (
 	)
 )
 IF EXIST MEMORY_G3_modded.bin (
-	g3tool.exe MEMORY_G3_modded.bin key
+	G3tool.exe MEMORY_G3_modded.bin key
 )
 pause
